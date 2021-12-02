@@ -8,7 +8,7 @@ def get_depths() -> List[int]:
 
 def part_one() -> int:
     depths = get_depths()
-    return sum([depths[idx - 1] < depth for idx, depth in enumerate(depths)])
+    return sum([depths[idx - 1] < depth for idx, depth in enumerate(depths) if idx > 0])
 
 
 def part_two() -> int:
