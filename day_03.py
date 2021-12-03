@@ -5,12 +5,12 @@ from functools import partial
 from typing import List
 
 
-def get_input():
+def get_input() -> List[str]:
     with open("day_03.txt", "r") as f:
         return [line.rstrip() for line in f.readlines()]
 
 
-def part_one(binary_numbers: List[str]):
+def part_one(binary_numbers: List[str]) -> int:
     epsilon, gamma, half_length = "", "", len(binary_numbers) // 2
     for idx in range(len(binary_numbers[0])):
         more_zeroes = [item[idx] for item in binary_numbers].count("0") > half_length
@@ -19,7 +19,7 @@ def part_one(binary_numbers: List[str]):
     return int(gamma, 2) * int(epsilon, 2)
 
 
-def part_two(all_binary_numbers: List[str]):
+def part_two(all_binary_numbers: List[str]) -> int:
     def keep_at_index(compare, binary_numbers: List[str], idx: int = 0):
         if len(binary_numbers) == 1:
             return int(binary_numbers[0], 2)
