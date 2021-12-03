@@ -2,14 +2,14 @@ from typing import List
 
 
 def get_moves() -> List[List[str]]:
-    with open("day_two.txt", "r") as f:
+    with open("day_02.txt", "r") as f:
         return [line.rstrip().split(" ") for line in f.readlines()]
+
 
 def part_one() -> int:
     hor_pos, depth = 0, 0
     for move in get_moves():
-        move_type, move = move
-        move = int(move)
+        move_type, move = move[0], int(move[1])
         match move_type:
             case "forward":
                 hor_pos += move
@@ -23,7 +23,7 @@ def part_one() -> int:
 def part_two() -> int:
     hor_pos, depth, aim = 0, 0, 0
     for move in get_moves():
-        move_type, move = move
+        move_type, move = move[0], int(move[1])
         move = int(move)
         match move_type:
             case "forward":

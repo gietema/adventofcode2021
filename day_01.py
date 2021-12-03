@@ -2,7 +2,7 @@ from typing import List
 
 
 def get_depths() -> List[int]:
-    with open("day_one.txt", "r") as f:
+    with open("day_01.txt", "r") as f:
         return [int(line.rstrip()) for line in f.readlines()]
 
 
