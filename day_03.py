@@ -23,7 +23,7 @@ def part_two(all_binary_numbers: List[str]):
     def keep_at_index(compare, binary_numbers: List[str], idx: int = 0):
         if len(binary_numbers) == 1:
             return int(binary_numbers[0], 2)
-        to_keep = "1" if compare([i[idx] for i in binary_numbers].count("0"), len(binary_numbers) // 2) else "0"
+        to_keep = str(int(compare([i[idx] for i in binary_numbers].count("0"), len(binary_numbers) // 2)))
         return keep_at_index(compare, [i for i in binary_numbers if i[idx] == to_keep], idx + 1)
     return math.prod(map(partial(keep_at_index, binary_numbers=all_binary_numbers), [operator.le, operator.gt]))
 
