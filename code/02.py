@@ -1,14 +1,14 @@
-from typing import List
+from pathlib import Path
 
 
-def get_moves() -> List[List[str]]:
-    with open("day_02.txt", "r") as f:
+def get_input() -> list[list[str]]:
+    with open(str(Path(__file__).parent.parent / "input" / "02.txt")) as f:
         return [line.rstrip().split(" ") for line in f.readlines()]
 
 
-def part_one() -> int:
+def part_one(moves: list[list[str]]) -> int:
     hor_pos, depth = 0, 0
-    for move in get_moves():
+    for move in moves:
         move_type, move = move[0], int(move[1])
         match move_type:
             case "forward":
@@ -20,15 +20,14 @@ def part_one() -> int:
     return hor_pos * depth
 
 
-def part_two() -> int:
+def part_two(moves: list[list[str]]) -> int:
     hor_pos, depth, aim = 0, 0, 0
-    for move in get_moves():
+    for move in moves:
         move_type, move = move[0], int(move[1])
-        move = int(move)
         match move_type:
             case "forward":
                 hor_pos += move
-                depth += (aim * move)
+                depth += aim * move
             case "down":
                 aim += move
             case "up":
@@ -37,4 +36,5 @@ def part_two() -> int:
 
 
 if __name__ == "__main__":
-    print(f"Solution part one: {part_one()} \nSolution part two: {part_two()}")
+    inp = get_input()
+    print(f"Solution part one: {part_one(inp)} \nSolution part two: {part_two(inp)}")
