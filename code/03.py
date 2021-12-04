@@ -1,7 +1,7 @@
-import operator
 import math
-from pathlib import Path
+import operator
 from functools import partial
+from pathlib import Path
 
 
 def get_input() -> list[str]:

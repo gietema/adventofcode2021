@@ -10,6 +10,9 @@ numpy = "*"
 
 [tool.poetry.dev-dependencies]
 black = "^21.11b1"
+isort = "^5.10.1"
+taskipy = "^1.9.0"
+flake8 = "^4.0.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -18,3 +21,6 @@ build-backend = "poetry.core.masonry.api"
 [tool.black]
 line-length = 120
 target-version = ["py310"]
+
+[tool.taskipy.tasks]
+lint = "black code && isort code && flake8 code"
