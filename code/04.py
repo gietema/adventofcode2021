@@ -24,8 +24,7 @@ def get_input():
 def part_one(numbers: list[int], boards: np.ndarray) -> int:
     for number in numbers:
         boards[boards == number] = -1
-        board_sums = np.sum(boards, axis=2)
-        if -5 in board_sums:
+        if -5 in (board_sums := np.sum(boards, axis=2)):
             board_index = np.argwhere(board_sums == -5)[0][0]
             bingo_board = boards[board_index][:5]
             return bingo_board[bingo_board != -1].sum() * number
