@@ -1,16 +1,13 @@
 def part_1(data: list[str]):
-
     horizontal_move = sum(
         [int(move.replace("forward ", "")) for move in data if move.startswith("f")]
     )
-
     down_move = sum(
         [int(move.replace("down ", "")) for move in data if move.startswith("d")]
     )
     up_move = sum(
         [int(move.replace("up ", "")) for move in data if move.startswith("u")]
     )
-
     return (down_move - up_move) * horizontal_move
 
 
