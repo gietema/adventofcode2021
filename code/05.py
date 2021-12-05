@@ -15,32 +15,32 @@ class Point:
 
 @dataclass
 class Line:
-    top_left: Point
-    bottom_right: Point
+    start: Point
+    end: Point
 
     @property
     def y_range(self):
-        if self.top_left.y > self.bottom_right.y:
-            return range(self.top_left.y, self.bottom_right.y - 1, -1)
-        return range(self.top_left.y, self.bottom_right.y + 1)
+        if self.start.y > self.end.y:
+            return range(self.start.y, self.end.y - 1, -1)
+        return range(self.start.y, self.end.y + 1)
 
     @property
     def x_range(self):
-        if self.top_left.x > self.bottom_right.x:
-            return range(self.top_left.x, self.bottom_right.x - 1, -1)
-        return range(self.top_left.x, self.bottom_right.x + 1)
+        if self.start.x > self.end.x:
+            return range(self.start.x, self.end.x - 1, -1)
+        return range(self.start.x, self.end.x + 1)
 
     def is_horizontal(self) -> bool:
-        return self.top_left.y == self.bottom_right.y
+        return self.start.y == self.end.y
 
     def is_vertical(self) -> bool:
-        return self.top_left.x == self.bottom_right.x
+        return self.start.x == self.end.x
 
     def covers(self) -> list[Point]:
         if self.is_horizontal():
-            return [Point(x, self.top_left.y) for x in self.x_range]
+            return [Point(x, self.start.y) for x in self.x_range]
         if self.is_vertical():
-            return [Point(self.top_left.x, y) for y in self.y_range]
+            return [Point(self.start.x, y) for y in self.y_range]
         # line is diagonal
         return [Point(x, y) for x, y in zip(self.x_range, self.y_range)]
 
