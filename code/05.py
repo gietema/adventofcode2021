@@ -1,7 +1,6 @@
-from itertools import chain
-
-from dataclasses import dataclass
 from collections import Counter
+from dataclasses import dataclass
+from itertools import chain
 from pathlib import Path
 
 
@@ -47,9 +46,10 @@ class Line:
 
 
 def get_lines() -> list[Line]:
-    return [(Line(*[Point(*[int(coord) for coord in point.split(",")])
-                    for point in input_line.rstrip().split("->")]))
-            for input_line in open(Path(__file__).parent.parent / "input" / "05.txt")]
+    return [
+        Line(*[Point(*[int(coord) for coord in point.split(",")]) for point in input_line.rstrip().split("->")])
+        for input_line in open(Path(__file__).parent.parent / "input" / "05.txt")
+    ]
 
 
 def part_one(lines: list[Line]) -> int:
@@ -63,5 +63,5 @@ def part_two(lines: list[Line]) -> int:
 
 
 if __name__ == "__main__":
-    lines = get_lines()
-    print(f"Solution part one: {part_one(lines)} \nSolution part two: {part_two(lines)}")
+    inp = get_lines()
+    print(f"Solution part one: {part_one(inp)} \nSolution part two: {part_two(inp)}")
