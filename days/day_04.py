@@ -26,7 +26,7 @@ def part_1(data: list[str]):
     board_idx = bingo_idx_list[0]
     board_numbers_list = board_numbers_str.strip(",").split(",")
     board_start_idx = board_idx * _BOARD_SIZE
-    board = board_numbers_list[board_start_idx: board_start_idx + _BOARD_SIZE]
+    board = board_numbers_list[board_start_idx : board_start_idx + _BOARD_SIZE]
     remaining_sum = sum([int(number) for number in board if number != "🎅"])
     return remaining_sum * int(drawn_number)
 
@@ -37,7 +37,7 @@ def find_bingo(board_numbers_list, bingo_idx_list):
     for idx in range(0, len(board_numbers_list), 5):
         if idx // _BOARD_SIZE in bingo_idx_list + new_bingos:
             continue
-        if board_numbers_list[idx: idx + _ROW_SIZE] == ["🎅"] * _ROW_SIZE:
+        if board_numbers_list[idx : idx + _ROW_SIZE] == ["🎅"] * _ROW_SIZE:
             new_bingos.append(idx // _BOARD_SIZE)
             continue
 
@@ -46,7 +46,10 @@ def find_bingo(board_numbers_list, bingo_idx_list):
             continue
         for offset in range(_ROW_SIZE):
             start_idx = idx + offset
-            if board_numbers_list[start_idx: start_idx + _BOARD_SIZE: _ROW_SIZE] == ["🎅"] * _ROW_SIZE:
+            if (
+                board_numbers_list[start_idx : start_idx + _BOARD_SIZE : _ROW_SIZE]
+                == ["🎅"] * _ROW_SIZE
+            ):
                 new_bingos.append(idx // _BOARD_SIZE)
                 break
     if not new_bingos:
@@ -77,7 +80,7 @@ def part_2(data: list[str]):
     last_board_idx = bingo_idx_list[-1]
     board_numbers_list = board_numbers_str.strip(",").split(",")
     board_start_idx = last_board_idx * _BOARD_SIZE
-    board = board_numbers_list[board_start_idx: board_start_idx + _BOARD_SIZE]
+    board = board_numbers_list[board_start_idx : board_start_idx + _BOARD_SIZE]
     remaining_sum = sum([int(number) for number in board if number != "🎅"])
     return remaining_sum * int(drawn_number)
 
@@ -85,7 +88,9 @@ def part_2(data: list[str]):
 def _parse_bingo_boards(board_str: str):
 
     board_row_list = [board_row.strip() for board_row in board_str if board_row]
-    board_numbers = [number for board in board_row_list for number in board.split(" ") if number]
+    board_numbers = [
+        number for board in board_row_list for number in board.split(" ") if number
+    ]
     return ",".join(board_numbers)
 
 
