@@ -36,7 +36,7 @@ class Line:
     def is_vertical(self) -> bool:
         return self.start.x == self.end.x
 
-    def covers(self) -> list[Point]:
+    def points(self) -> list[Point]:
         if self.is_horizontal():
             return [Point(x, self.start.y) for x in self.x_range]
         if self.is_vertical():
@@ -53,12 +53,12 @@ def get_lines() -> list[Line]:
 
 
 def part_one(lines: list[Line]) -> int:
-    counter = Counter(chain(*[line.covers() for line in lines if line.is_vertical() or line.is_horizontal()]))
+    counter = Counter(chain(*[line.points() for line in lines if line.is_vertical() or line.is_horizontal()]))
     return len([point for point, count in counter.items() if count >= 2])
 
 
 def part_two(lines: list[Line]) -> int:
-    counter = Counter(chain(*[line.covers() for line in lines]))
+    counter = Counter(chain(*[line.points() for line in lines]))
     return len([point for point, count in counter.items() if count >= 2])
 
 
