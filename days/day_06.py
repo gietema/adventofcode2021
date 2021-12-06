@@ -1,4 +1,5 @@
 from collections import Counter
+from time import time
 from typing import Union
 
 
@@ -42,6 +43,7 @@ if __name__ == "__main__":
 
     answer_1 = part_1(input_data)
     print(answer_1)
-
+    start = time()
     answer_2 = part_2(input_data)
-    print(answer_2)
+    end = time()
+    print(answer_2, f"in {end - start} seconds")
