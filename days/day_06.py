@@ -6,8 +6,7 @@ def part_1(fishies: list[int]):
     for day in range(80):
         fishies = _wait_a_day(fishies)
         fishies.sort()
-        nr_pregnant_fishies = fishies.count(-1)
-        if nr_pregnant_fishies:
+        if nr_pregnant_fishies := fishies.count(-1):
             fishies[:nr_pregnant_fishies] = [6] * nr_pregnant_fishies
             new_fishies = [8] * nr_pregnant_fishies
             fishies += new_fishies
