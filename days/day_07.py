@@ -16,7 +16,7 @@ def calculate_fuel_costs(crabs: list[int], cost_func: Callable):
     left = min(crabs)
     right = max(crabs) + 1
 
-    least_fuel = 9e20
+    least_fuel = 9e20  # big number
 
     for position in range(left, right):
         fuel_cost = sum([cost_func(current=crab, to=position) for crab in crabs])
