@@ -22,9 +22,7 @@ def part_2(data: list[str]):
     outputs = [line.split(" | ")[1] for line in data]
 
     total = 0
-    idx = 0
     for line, output in zip(lines, outputs):
-        idx += 1
         digits = line.split(" ")
         digit_dict, loc_dict = _build_digit_dict(digits)
 
