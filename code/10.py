@@ -12,9 +12,7 @@ def part_one(subsystem: list[str]) -> int:
         for char in line:
             if char in CHAR_DICT:
                 expected_closes.append(CHAR_DICT[char])
-            elif char == expected_closes[-1]:
-                expected_closes.pop()
-            else:
+            elif char != expected_closes.pop():
                 score += score_dict[char]
                 break
     return score
@@ -35,9 +33,7 @@ def part_two(subsystem: list[str]) -> int:
         for char in line:
             if char in CHAR_DICT:
                 expected_closes.append(CHAR_DICT[char])
-            elif char == expected_closes[-1]:
-                expected_closes.pop()
-            else:
+            elif char != expected_closes.pop():
                 found_error = True
         if len(expected_closes) > 0 and not found_error:
             scores.append(score_line(expected_closes[::-1]))
