@@ -25,8 +25,6 @@ def get_numbers(entry):
     six = [chars for chars in length_per_number[6] if chars not in [nine, zero]][0]
     bottom_left = [char for char in zero if char not in nine and char in six][0]
     top_right = [char for char in zero if char in nine and char not in six][0]
-    print(top_right, "without_set")
-    print()
     two = [
         option
         for option in length_per_number[5]

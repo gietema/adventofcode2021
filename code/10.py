@@ -1,11 +1,11 @@
 from pathlib import Path
 
 CHAR_DICT = {"[": "]", "(": ")", "<": ">", "{": "}"}
+SCORE_DICT_PART_ONE = {"]": 57, "}": 1197, ")": 3, ">": 25137}
 SCORE_DICT_PART_TWO = {")": 1, "]": 2, "}": 3, ">": 4}
 
 
 def part_one(subsystem: list[str]) -> int:
-    score_dict = {"]": 57, "}": 1197, ")": 3, ">": 25137}
     score = 0
     for line in subsystem:
         expected_closes = []
@@ -13,7 +13,7 @@ def part_one(subsystem: list[str]) -> int:
             if char in CHAR_DICT:
                 expected_closes.append(CHAR_DICT[char])
             elif char != expected_closes.pop():
-                score += score_dict[char]
+                score += SCORE_DICT_PART_ONE[char]
                 break
     return score
 
