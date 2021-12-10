@@ -21,8 +21,7 @@ def part_one(subsystem: list[str]) -> int:
 def score_line(closes: list[str]) -> int:
     score = 0
     for char in closes:
-        score *= 5
-        score += SCORE_DICT_PART_TWO[char]
+        score = score * 5 + SCORE_DICT_PART_TWO[char]
     return score
 
 
