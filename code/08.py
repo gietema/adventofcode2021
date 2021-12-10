@@ -8,7 +8,7 @@ def get_letters(length_per_entry, length):
 
 
 def get_numbers(entry):
-    length_per_entry = {e: len(e) for e in sorted(entry)}
+    length_per_entry = {e: len(e) for e in entry}
     length_per_number = {number: get_letters(length_per_entry, number) for number in range(10)}
     seven = length_per_number[3][0]
     one = length_per_number[2][0]
@@ -25,6 +25,8 @@ def get_numbers(entry):
     six = [chars for chars in length_per_number[6] if chars not in [nine, zero]][0]
     bottom_left = [char for char in zero if char not in nine and char in six][0]
     top_right = [char for char in zero if char in nine and char not in six][0]
+    print(top_right, "without_set")
+    print()
     two = [
         option
         for option in length_per_number[5]
@@ -35,7 +37,8 @@ def get_numbers(entry):
         for option in length_per_number[5]
         if all([char in option for char in [top_right]]) and bottom_left not in option
     ][0]
-    five = [option for option in length_per_number[5] if option not in [three, two]][0]
+    five = list(set(length_per_number[5]) - {three, two})[0]
+    # five = [option for option in length_per_number[5] if option not in [three, two]][0]
     return [zero, one, two, three, four, five, six, seven, eight, nine]
 
 
@@ -70,12 +73,7 @@ def part_two():
         [f.strip().split(" ") for f in x.strip().split("|")]
         for x in open(Path(__file__).parent.parent / "input" / "08.txt")
     ]
-    output_values = 0
-    for entry in entries:
-        numbers = get_numbers(entry[0])
-        four_digits = entry[1]
-        output_values += get_output(numbers, four_digits)
-    return output_values
+    return sum([get_output(get_numbers(entry[0]), entry[1]) for entry in entries])
 
 
 if __name__ == "__main__":
