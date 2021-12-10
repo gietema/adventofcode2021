@@ -3,22 +3,22 @@ from math import prod
 from pathlib import Path
 
 
-def get_heightmap():
+def get_heightmap() -> list[list[int]]:
     heightmap = [[int(p) for p in line.rstrip()] for line in open(Path(__file__).parent.parent / "input" / "09.txt")]
     # add padding to simplify indexing
     heightmap = [[10] + line + [10] for line in heightmap]
     return [[10] * len(heightmap[0])] + heightmap + [[10] * len(heightmap[0])]
 
 
-def is_low_point(heightmap, point, line_idx, idx):
+def is_low_point(heightmap: list[list[int]], point: int, line_idx: int, idx: int) -> bool:
     return all([point < heightmap[p[0]][p[1]] for p in points_to_explore(line_idx, idx)])
 
 
-def points_to_explore(line_idx, idx):
+def points_to_explore(line_idx: int, idx: int) -> list[tuple[int, int]]:
     return [(line_idx + 1, idx), (line_idx - 1, idx), (line_idx, idx + 1), (line_idx, idx - 1)]
 
 
-def part_one(heightmap):
+def part_one(heightmap: list[list[int]]) -> int:
     low_points = [
         [1 + point for idx, point in enumerate(line[1:-1], 1) if is_low_point(heightmap, point, line_idx, idx)]
         for line_idx, line in enumerate(heightmap[1:-1], 1)
@@ -26,7 +26,7 @@ def part_one(heightmap):
     return sum([*chain(*[p for p in low_points if len(p) > 0])])
 
 
-def part_two(heightmap):
+def part_two(heightmap: list[list[int]]) -> int:
     basins = []
     for line_idx, line in enumerate(heightmap[1:-1], 1):
         for idx, point in enumerate(line[1:-1], 1):
@@ -35,7 +35,7 @@ def part_two(heightmap):
     return prod(sorted([len(i) for i in basins])[-3:])
 
 
-def get_basin_points(heightmap, idx, line_idx):
+def get_basin_points(heightmap: list[list[int]], idx: int, line_idx: int) -> list[tuple[int, int]]:
     basin_points = [(line_idx, idx)]
     to_explore = points_to_explore(line_idx, idx)
     while len(to_explore) > 0:
