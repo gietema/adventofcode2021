@@ -3,7 +3,7 @@ from itertools import chain, combinations
 from pathlib import Path
 
 
-def get_adjacent(y, x):
+def get_adjacent(y: int, x: int) -> list[tuple[int, int]]:
     return [
         (new_y, new_x)
         for i, j in set(combinations([-1, -1, 0, 1, 1, 0, -1], 2))
@@ -18,19 +18,11 @@ def increase_energy_level(octopuses: list[list[int]]) -> list[list[int]]:
     return octopuses
 
 
-def should_flash(octopuses):
-    return any([o > 9 for o in chain(*octopuses)])
-
-
-def all_flashed(octopuses):
-    return all([octopus == 0 for octopus in chain(*octopuses)])
-
-
 def solve(octopuses: list[list[int]], part_one: bool = False) -> int:
     octopuses, num_flashes, steps = copy.deepcopy(octopuses), 0, 0
-    while not all_flashed(octopuses):
+    while not all([octopus == 0 for octopus in chain(*octopuses)]):  # not all flashed
         steps, octopuses, flashed_octopuses = steps + 1, increase_energy_level(octopuses), []
-        while should_flash(octopuses):
+        while any([o > 9 for o in chain(*octopuses)]):  # should flash
             octopuses, flashed_octopuses = flash(octopuses, flashed_octopuses)
         num_flashes += len(flashed_octopuses)
         if part_one and steps == 100:
@@ -38,7 +30,9 @@ def solve(octopuses: list[list[int]], part_one: bool = False) -> int:
     return steps
 
 
-def flash(octopuses, flashed_octopuses):
+def flash(
+    octopuses: list[list[int]], flashed_octopuses: list[tuple[int, int]]
+) -> tuple[list[list[int]], list[tuple[int, int]]]:
     for idx_line, line in enumerate(octopuses):
         for idx, o in filter(lambda x: x[1] > 9 and (idx_line, x[0]) not in flashed_octopuses, enumerate(line)):
             for adjacent in filter(lambda x: x not in flashed_octopuses, get_adjacent(idx_line, idx)):
