@@ -36,7 +36,6 @@ def get_numbers(entry):
         if all([char in option for char in [top_right]]) and bottom_left not in option
     ][0]
     five = list(set(length_per_number[5]) - {three, two})[0]
-    # five = [option for option in length_per_number[5] if option not in [three, two]][0]
     return [zero, one, two, three, four, five, six, seven, eight, nine]
 
 
