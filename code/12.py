@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
@@ -17,10 +18,10 @@ CAVES = get_caves()
 SMALL_CAVES = [cave for cave in CAVES if cave.islower() and cave not in ["end", "start"]]
 
 
+@dataclass
 class Cave:
-    def __init__(self, name: str, previous: Optional["Cave"] = None):
-        self.name = name
-        self.previous = previous
+    name: str
+    previous: Optional["Cave"] = None
 
     @property
     def paths(self) -> list["Cave"]:
