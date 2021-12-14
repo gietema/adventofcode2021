@@ -12,7 +12,7 @@ def get_answer(counts: dict[str, int], template: str) -> int:
 
 
 def get_counts(steps: int, counts: dict[str, int], rules: dict[str, str]) -> dict[str, int]:
-    for i in range(steps):
+    for _ in range(steps):
         new_counts = defaultdict(lambda: 0)
         for key, count in counts.items():
             new_counts[key[0] + rules[key]] += count
